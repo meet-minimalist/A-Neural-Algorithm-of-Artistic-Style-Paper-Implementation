@@ -6,6 +6,7 @@ import tensorflow as tf
 import time
 
 VGG_MEAN = [103.939, 116.779, 123.68]
+# BGR format ^
 
 # This is the VGG16 model without FC layers and with Average pooling instead of Max pooling
 

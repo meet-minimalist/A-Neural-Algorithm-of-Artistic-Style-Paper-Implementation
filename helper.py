@@ -4,6 +4,9 @@ import matplotlib.image as mpimg
 import numpy as np
 import os
 
+VGG_MEAN = [123.68, 116.779, 103.939]
+# RGB format ^
+
 def resize_and_rescale_img(image_path, w, h, output_path_, output_filename):
     # This will resize the image to width x height dimensions and then scale down in the range of [0-1]   
     if os.path.isfile(image_path):
@@ -25,10 +28,15 @@ def post_process_and_display(cnn_output, output_path, output_filename, save_file
     # and ultimately displays the image
     
     x = np.squeeze(cnn_output)
-    x = (x - np.amin(x)) / (np.amax(x) - np.amin(x))
 
-    x *= 255
+    for i in range(x.shape[2]):
+        x[:, :, i] -= np.mean(x[:, :, i])
+        x[:, :, i] /= (np.std(x[:, :, i]) + 1e-05)
+        x[:, :, i] -= np.amin(x[:, :, i])
+        x[:, :, i] /= (np.amax(x[:, :, i]) - np.amin(x[:, :, i]))
+        x[:, :, i] *= 255
     x = np.clip(x, 0, 255).astype('uint8')
+    
     img = Image.fromarray(x, mode='RGB')
     img.show()
     if save_file:

@@ -12,7 +12,7 @@ def compute_tf_output(img_array):
 
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
-        print(tf.trainable_variables())
+        #print(tf.trainable_variables())
         for i in range(len(content_layers_list)):
             img_layer_outputs[i] = sess.run(content_layers_list[i])
             #print("No. ", i, " ", content_layers_list[i].name, "completed.")
