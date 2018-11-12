@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np
 import os
+import matplotlib.pyplot as plt
 
 VGG_MEAN = [123.68, 116.779, 103.939]
 # RGB format ^
@@ -47,21 +48,18 @@ def post_process_and_display(cnn_output, output_path, output_filename, save_file
     # This will take input_noise of (1, w, h, channels) shapped array taken from tensorflow operation
     # and ultimately displays the image
     
-    x = np.squeeze(cnn_output)
-
-    for i in range(x.shape[2]):
-        x[:, :, i] -= np.mean(x[:, :, i])
-        x[:, :, i] /= (np.std(x[:, :, i]) + 1e-05)
-        x[:, :, i] -= np.amin(x[:, :, i])
-        x[:, :, i] /= (np.amax(x[:, :, i]) - np.amin(x[:, :, i]))
-        x[:, :, i] *= 255
+    x = np.clip(cnn_output, 0.0, 1.0)
+    x = np.squeeze(x)
+    x -= np.amin(x)
+    x /= (np.amax(x) - np.amin(x))
+    x *= 255
     x = np.clip(x, 0, 255).astype('uint8')
-    
+    plt.imshow(x)
+    plt.show()
     img = Image.fromarray(x, mode='RGB')
     img.show()
     if save_file:
         if not os.path.exists(output_path):
             os.makedirs(output_path)
         img.save(output_path + output_filename)
-    
     return x
