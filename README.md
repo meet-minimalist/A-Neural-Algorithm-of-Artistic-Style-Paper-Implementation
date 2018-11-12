@@ -9,9 +9,9 @@ _Step 2: Computing the output for selected layers for the content image and all 
 
 _Step 3: What are loss functions in this problem and computing the loss functions._
 
-      _Step 3A: Content Loss for reconstruction of the content image._
+_Step 3A: Content Loss for reconstruction of the content image._
       
-      _Step 3B: Style Loss for reconstruction of the style from a style image irrespective of content placement of the image._
+_Step 3B: Style Loss for reconstruction of the style from a style image irrespective of content placement of the image._
       
 _Step 4: Creating combined Tensorflow model, running it to minimize both the losses and optimize the input noise variable._
 
