@@ -16,6 +16,7 @@ _Step 3B: Style Loss for reconstruction of the style from a style image irrespec
 _Step 4: Creating combined Tensorflow model, running it to minimize both the losses and optimize the input noise variable._
 
 ![](https://github.com/meet-minimalist/A-Neural-Algorithm-of-Artistic-Style-Paper-Implementation/blob/master/Final%20Results.jpg)
+![](https://github.com/meet-minimalist/A-Neural-Algorithm-of-Artistic-Style-Paper-Implementation/blob/master/final_gif.gif)
 
 #### Files:
 1. Final Results.jpg - Combined image for all the results. 
